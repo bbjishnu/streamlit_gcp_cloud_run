@@ -36,7 +36,7 @@
 
 
 
-- ### CONFIGURE GLCOUD 
+- ### CONFIGURE GCLOUD
 - **gcloud init** < Set Project,Billing,  Service Account and Region and Zone> 
 - exmaple to set Region as Mumbai India...
 - **gcloud config set compute/region asia-south1**
@@ -47,7 +47,6 @@
 - ###  ENABLE CONTAINER REGISTRY AND CLOUD RUN API 
 - run the following command in glocud terminal.
 - **gcloud services enable run.googleapis.com containerregistry.googleapis.com**
-
 
 
 - ###  PUSH LOCAL DOCKER IMAGE TO GOOGLE CLOUD REGISTRY 
