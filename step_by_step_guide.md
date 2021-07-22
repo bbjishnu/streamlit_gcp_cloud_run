@@ -6,18 +6,16 @@
 - Test the App: **streamlit run app.py** 
 - If all correct, close the app.
 
-<br/>
-
 ### Step 2 : Create Dockerfile, Image and Do Local Test
 
 - Go to **data_app** folder.
 
-<br/>
+
 
 - ### CREATE DOCKER IMAGE 
 - **docker build -t  st_demo:v1.0 .**
 
-<br/>
+
 
 - ### LOCAL TEST OF DOCKER IMAGE 
 - Create a **bash** variable 
@@ -31,12 +29,12 @@
 - ### STOP RUNNING DOCKER ONCE TEST IS DONE
 - **docker stop mytest**
 
-<br/>
+
 
 ### Step 3 : Activate gcloud Command Line Tool  and Push Local Image to GCP
 - To install the app on  Google Cloud, need to have account and gcloud tool installed in the system. 
 
-<br/>
+
 
 - ### CONFIGURE GLCOUD 
 - **gcloud init** < Set Project,Billing,  Service Account and Region and Zone> 
@@ -44,13 +42,13 @@
 - **gcloud config set compute/region asia-south1**
 - **gcloud config set compute/zone asia-south1-b**
 
-<br/>
+
 
 - ###  ENABLE CONTAINER REGISTRY AND CLOUD RUN API 
 - run the following command in glocud terminal.
 - **gcloud services enable run.googleapis.com containerregistry.googleapis.com**
 
-<br/>
+
 
 - ###  PUSH LOCAL DOCKER IMAGE TO GOOGLE CLOUD REGISTRY 
 - Following command will allow local docker to used by gcloud tool .
