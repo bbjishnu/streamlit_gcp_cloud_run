@@ -1,19 +1,31 @@
 import os   
 import sys  
+import glob
 import numpy as np 
 import pandas as pd 
 
 import streamlit as st 
+from utils import *
 
 app_name="Streamlit-GCP-Cloud-Run"
 
 PAGE_CONFIG ={"page_title":app_name,"layout":"wide"}
 st.set_page_config(**PAGE_CONFIG) 
+bucket_name="ds-str-demo-bucket"
+dir = './data'
 
 def main():
 
+    
     st.sidebar.write(":point_down: GCP Bucket Files")
-    selected_item = st.sidebar.selectbox("select the dataset",["A","B","C"],index=1)
+    options = list_object(bucket_name)
+
+    # Remove Current Files
+    filelist = glob.glob(os.path.join(dir, "*"))
+    for f in filelist:
+        os.remove(f)
+
+    selected_item = st.sidebar.selectbox("select the dataset from Google Cloud Storage",options,index=0)
     st.title("Streamlit is Awesome")
     st.markdown("""
             This is a dummy/toy streamlit app to created for showcasing deployment on Google Cloud Run.
@@ -25,21 +37,24 @@ def main():
             The detail process steps are listed on the following GitHub repo:
             [GCP Deployment](https://github.com/dsightsonline/streamlit_gcp_cloud_run)
     """)
-   
-    st.write(selected_item)
-    st.subheader(":point_down: Display Selected Files")
-    st.write("")
-    df = pd.DataFrame(
-    np.random.randn(10, 20),
-    columns=('col %d' % i for i in range(20)))
+    
+    st.subheader("Display Selected Data From Selected CSV File : "+selected_item)
+    
+    # Remove Current Files
+    filelist = glob.glob(os.path.join(dir, "*"))
+    for f in filelist:
+        os.remove(f)
+    object_name = selected_item+".csv"
+    local_path = "./data/"+object_name
+    download_from_bucket(bucket_name,object_name,local_path)
+    
+    data=data_read(local_path) 
+    st.write(" ")   
+    st.dataframe(data)
 
-    # st.dataframe(df.style.highlight_max(axis=0))
-    st.dataframe(df)
-
-    st.subheader("Display Chart of Selected Data")
-    chart_data = pd.DataFrame(
-     np.random.randn(20, 3),
-     columns=['a', 'b', 'c'])
+    st.subheader("Area Chart  of Selected Data")
+    st.write(" ")
+    chart_data= data[[x for x in list(data.columns)[:3]]]
     st.area_chart(chart_data)
 
 if __name__=="__main__":
