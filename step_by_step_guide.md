@@ -44,7 +44,7 @@
 - Following command will allow local docker engine tobe used by gcloud tool .
 - **gcloud auth configure-docker**
 - Following step will create a tag of the local image as per gcp requirment.
-- **docker st_demo:v1.0  gcr.io/< GCP PROJECT ID > /st_demo:v1.0**
+- **docker  tag st_demo:v1.0  gcr.io/< GCP PROJECT ID > /st_demo:v1.0**
 - Push Local Image to GCP Registry
 - **docker push gcr.io/< GCP PROJECT ID > /st_demo:v1.0**
 
